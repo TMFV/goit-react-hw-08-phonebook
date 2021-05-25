@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import authOperations from "../redux/auth/auth-operations";
 
 const styles = {
   form: {
@@ -68,4 +70,12 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView;
+const mapDispatchToProps = {
+  onLogin: authOperations.logIn,
+};
+//Full version
+/* const mapDispatchToProps = dispatch=>{
+  onSubmit: (data)=>dispatch (authOperations.register(data))
+} */
+
+export default connect(null, mapDispatchToProps)(LoginView);

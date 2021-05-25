@@ -17,7 +17,7 @@ const UserMenu = ({ mail, name, onLogout }) => (
     <span style={styles.mail}>User e-mail: {mail}</span>
     <span style={styles.name}>User name: {name}</span>
     <button type="button" onClick={onLogout}>
-      Logout
+      Logout 🟥
     </button>
   </div>
 );
