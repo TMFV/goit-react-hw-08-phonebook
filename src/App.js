@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import ContactForm from "./ContactForm/ContactForm";
-import ContactList from "./ContactList/ContactList";
-import Filter from "./Filter/Filter";
+import { Switch, Route, Router } from "react-router-dom";
+import ContactForm from "./components/ContactForm/ContactForm";
+import ContactList from "./components/ContactList/ContactList";
+import Filter from "./components/Filter/Filter";
 import appActions from "./redux/app/app-actions";
 import appOperations from "./redux/app/app-operations";
 import { connect } from "react-redux";
 import selectors from "./redux/app/contacts-selectors";
+import AuthNav from "./components/AuthNav";
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +17,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <>
+          <Switch>
+            <Router exact path="/" component={HomeView} />
+            <Router exact path="/register" component={RegisterView} />
+            <Router exact path="/login" component={LoginView} />
+            <Router exact path="/contacts" component={ContactsView} />
+          </Switch>
+        </>
+        <AuthNav />
         <h1>Phonebook</h1>
         {this.props.isLoadingContacts && <h2>Loading ...</h2>}
         <ContactForm onSubmitData={this.props.formSubmitHandler} />
