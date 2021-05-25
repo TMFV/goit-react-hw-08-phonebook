@@ -1,32 +1,38 @@
 import React, { Component } from "react";
-import { Switch, Route, Router } from "react-router-dom";
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
+import { Route } from "react-router-dom";
+import ContactForm from "./ContactForm/ContactForm";
+import ContactList from "./ContactList/ContactList";
+import Filter from "./Filter/Filter";
 import appActions from "./redux/app/app-actions";
 import appOperations from "./redux/app/app-operations";
 import { connect } from "react-redux";
 import selectors from "./redux/app/contacts-selectors";
-import AuthNav from "./components/AuthNav";
+import HomeView from "./views/HomeView";
+import LoginView from "./views/LoginView";
+import RegisterView from "./views/RegisterView";
+import ContactsView from "./views/ContactsView";
+import AppBar from "./AppBar";
 
 class App extends Component {
-  componentDidMount() {
+  /*   componentDidMount() {
     this.props.fetchContacts();
-  }
+  } */
 
   render() {
+    console.log(this.props.contacts);
+    console.log(this.props.filter);
+    console.log(this.props.visibleArray);
+
     return (
       <div className="App">
+        <AppBar />
         <>
-          <Switch>
-            <Router exact path="/" component={HomeView} />
-            <Router exact path="/register" component={RegisterView} />
-            <Router exact path="/login" component={LoginView} />
-            <Router exact path="/contacts" component={ContactsView} />
-          </Switch>
+          <Route path="/" exact component={HomeView} />
+          <Route path="/register" component={RegisterView} />
+          <Route path="/login" component={LoginView} />
+          <Route path="/contacts" component={ContactsView} />
         </>
-        <AuthNav />
-        <h1>Phonebook</h1>
+        {/*  <h1>Phonebook</h1>
         {this.props.isLoadingContacts && <h2>Loading ...</h2>}
         <ContactForm onSubmitData={this.props.formSubmitHandler} />
         <h1>Contacts</h1>
@@ -34,12 +40,12 @@ class App extends Component {
         <ContactList
           contacts={this.props.visibleArray}
           del={this.props.contactDelete}
-        />
+        /> */}
       </div>
     );
   }
 }
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   isLoadingContacts: selectors.getIsLoading(state),
   contacts: selectors.getContacts(state),
   filter: selectors.getFilter(state),
@@ -53,5 +59,6 @@ const mapDispatchToProrps = (dispatch) => ({
   contactDelete: (contactId) =>
     dispatch(appOperations.deleteContact(contactId)),
   filterSet: (str) => dispatch(appActions.filterSet(str)),
-});
-export default connect(mapStateToProps, mapDispatchToProrps)(App);
+}); */
+//export default connect(mapStateToProps, mapDispatchToProrps)(App);
+export default App;

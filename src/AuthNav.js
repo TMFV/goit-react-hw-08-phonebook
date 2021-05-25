@@ -1,11 +1,16 @@
 import { NavLink } from "react-router-dom";
-import classNames from "classnames/bind";
-import { getQueriesForElement } from "@testing-library/dom";
 
-var cx = classNames.bind(styles);
-var styles = {
-  link: { color: "red" },
-  activeLink: { color: "green" },
+const styles = {
+  link: {
+    margin: 5,
+    display: "block",
+    color: "red",
+  },
+  activeLink: {
+    margin: 5,
+    display: "block",
+    color: "green",
+  },
 };
 
 const AuthNav = () => (
