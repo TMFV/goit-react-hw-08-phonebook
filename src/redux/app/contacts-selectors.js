@@ -12,6 +12,7 @@ const getContacts = (state) => state.app.contacts;
   );
   return [...newArr];
 }; */
+
 // add memo
 const getVisibleFilterArray = createSelector(
   [getContacts, getFilter],

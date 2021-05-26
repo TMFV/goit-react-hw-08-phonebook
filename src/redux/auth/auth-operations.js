@@ -48,15 +48,6 @@ const logOut = () => async (dispatch) => {
   }
 };
 
-/*
- * GET @ /users/current
- * headers:
- *    Authorization: Bearer token
- *
- * 1. Забираем токен из стейта через getState()
- * 2. Если токена нет, выходим не выполняя никаких операций
- * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
- */
 const getCurrentUser = () => async (dispatch, getState) => {
   const {
     auth: { token: persistedToken },

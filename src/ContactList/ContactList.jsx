@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-//import { uuid } from "uuidv4";
 
 class ContactList extends Component {
   deleteId = (Id) => {

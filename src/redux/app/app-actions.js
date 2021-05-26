@@ -1,5 +1,3 @@
-//import types from "./app-types";
-import axios from "axios";
 import { createAction } from "@reduxjs/toolkit";
 
 const addContactRequest = createAction("contacts/addContactRequest");
