@@ -32,8 +32,10 @@ class App extends Component {
         <AppBar />
         <>
           <Route exact path="/" component={HomeView} />
-          <Route path="/register" component={RegisterView} />
-          <PublicRoute path="/login" redirectTo="/" restricted>
+          <PublicRoute path="/register" redirectTo="/contacts" restricted>
+            <Route path="/register" component={RegisterView} />
+          </PublicRoute>
+          <PublicRoute path="/login" redirectTo="/contacts" restricted>
             <Route path="/login" component={LoginView} />
           </PublicRoute>
           <PrivateRoute path="/contacts" redirectTo="/login">
