@@ -12,11 +12,12 @@ import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import ContactsView from "./views/ContactsView";
 import AppBar from "./AppBar";
+import authOperations from "./redux/auth/auth-operations";
 
 class App extends Component {
-  /*   componentDidMount() {
-    this.props.fetchContacts();
-  } */
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
 
   render() {
     console.log(this.props.contacts);
@@ -27,7 +28,7 @@ class App extends Component {
       <div className="App">
         <AppBar />
         <>
-          <Route path="/" exact component={HomeView} />
+          <Route exact path="/" component={HomeView} />
           <Route path="/register" component={RegisterView} />
           <Route path="/login" component={LoginView} />
           <Route path="/contacts" component={ContactsView} />
@@ -60,5 +61,9 @@ const mapDispatchToProrps = (dispatch) => ({
     dispatch(appOperations.deleteContact(contactId)),
   filterSet: (str) => dispatch(appActions.filterSet(str)),
 }); */
-//export default connect(mapStateToProps, mapDispatchToProrps)(App);
-export default App;
+
+const mapDispatchToProrps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProrps)(App);

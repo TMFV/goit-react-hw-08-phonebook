@@ -3,51 +3,50 @@ import authActions from "./auth-actions";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
-const token = {};
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
 
-/*
- * POST @ /users/signup
- * body { name, email, password }
- *
- * После успешной регистрации добавляем токен в HTTP-заголовок
- */
 const register = (credentials) => async (dispatch) => {
   dispatch(authActions.registerRequest());
 
   try {
     const response = await axios.post("/users/signup", credentials);
     dispatch(authActions.registerSuccess(response.data));
+    token.set(response.data.token);
   } catch (error) {
     dispatch(authActions.registerError(error.message));
   }
 };
 
-/*
- * POST @ /users/login
- * body:
- *    { email, password }
- *
- * После успешного логина добавляем токен в HTTP-заголовок
- */
 const logIn = (credentials) => async (dispatch) => {
   dispatch(authActions.loginRequest());
 
   try {
     const response = await axios.post("/users/login", credentials);
     dispatch(authActions.loginSuccess(response.data));
+    token.set(response.data.token);
   } catch (error) {
     dispatch(authActions.loginError(error.message));
   }
 };
 
-/*
- * POST @ /users/logout
- * headers:
- *    Authorization: Bearer token
- *
- * 1. После успешного логаута, удаляем токен из HTTP-заголовка
- */
-const logOut = () => async (dispatch) => {};
+const logOut = () => async (dispatch) => {
+  dispatch(authActions.logoutRequest());
+
+  try {
+    await axios.post("/users/logout");
+    dispatch(authActions.logoutSuccess());
+    token.unset();
+  } catch (error) {
+    dispatch(authActions.logoutError(error.message));
+  }
+};
 
 /*
  * GET @ /users/current
@@ -58,6 +57,22 @@ const logOut = () => async (dispatch) => {};
  * 2. Если токена нет, выходим не выполняя никаких операций
  * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
  */
-const getCurrentUser = () => async (dispatch, getState) => {};
+const getCurrentUser = () => async (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+  //state.auth.token
+  if (!persistedToken) {
+    return;
+  }
+  token.set(persistedToken);
+  dispatch(authActions.getCurrentUserRequest());
+  try {
+    const response = await axios.get("/users/current");
+    dispatch(authActions.getCurrentUserSuccess(response.data));
+  } catch (error) {
+    dispatch(authActions.getCurrentUserError(error.message));
+  }
+};
 
 export default { register, logOut, logIn, getCurrentUser };
