@@ -13,6 +13,9 @@ import RegisterView from "./views/RegisterView";
 import ContactsView from "./views/ContactsView";
 import AppBar from "./AppBar";
 import authOperations from "./redux/auth/auth-operations";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import NotFound from "./views/NotFound";
 
 class App extends Component {
   componentDidMount() {
@@ -20,18 +23,22 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.contacts);
+    /*    console.log(this.props.contacts);
     console.log(this.props.filter);
     console.log(this.props.visibleArray);
-
+ */
     return (
       <div className="App">
         <AppBar />
         <>
           <Route exact path="/" component={HomeView} />
           <Route path="/register" component={RegisterView} />
-          <Route path="/login" component={LoginView} />
-          <Route path="/contacts" component={ContactsView} />
+          <PublicRoute path="/login" redirectTo="/" restricted>
+            <Route path="/login" component={LoginView} />
+          </PublicRoute>
+          <PrivateRoute path="/contacts" redirectTo="/login">
+            <Route path="/contacts" component={ContactsView} />
+          </PrivateRoute>
         </>
         {/*  <h1>Phonebook</h1>
         {this.props.isLoadingContacts && <h2>Loading ...</h2>}

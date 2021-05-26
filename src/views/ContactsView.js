@@ -6,6 +6,8 @@ import appActions from "../redux/app/app-actions";
 import appOperations from "../redux/app/app-operations";
 import { connect } from "react-redux";
 import selectors from "../redux/app/contacts-selectors";
+import authSelectors from "../redux/auth/auth-selectors";
+import authOperations from "../redux/auth/auth-operations";
 
 class ContactsView extends Component {
   componentDidMount() {
