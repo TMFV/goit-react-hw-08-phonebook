@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import authSelectors from "./redux/auth/auth-selectors";
+import authSelectors from "../redux/auth/auth-selectors";
 const styles = {
   link: {
     display: "inline-block",

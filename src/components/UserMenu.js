@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
-import authSelectors from "./redux/auth/auth-selectors";
-import authOperations from "./redux/auth/auth-operations";
+import authSelectors from "../redux/auth/auth-selectors";
+import authOperations from "../redux/auth/auth-operations";
+import Button from "@material-ui/core/Button";
 
 const styles = {
   container: {
@@ -20,9 +21,14 @@ const UserMenu = ({ mail, name, onLogout }) => (
   <div style={styles.container}>
     <span style={styles.mail}>User e-mail: {mail}</span>
     <span style={styles.name}>User name: {name}</span>
-    <button type="button" onClick={onLogout}>
+    <Button
+      type="button"
+      onClick={onLogout}
+      variant="contained"
+      color="primary"
+    >
       Logout 🟥
-    </button>
+    </Button>
   </div>
 );
 

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
 
 class Filter extends Component {
-  setFilterValue = event => {
+  setFilterValue = (event) => {
     let value = event.currentTarget.value.toUpperCase();
     this.props.setFilterToState(value);
   };
@@ -10,8 +11,7 @@ class Filter extends Component {
   render() {
     return (
       <div>
-        <h4>Find contacts by name</h4>
-        <input onChange={this.setFilterValue}></input>
+        <TextField label="Filter " onChange={this.setFilterValue} />
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import authOperations from "../redux/auth/auth-operations";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const styles = {
   form: {
@@ -37,44 +39,44 @@ class RegisterView extends Component {
 
     return (
       <div>
-        <h1>Registration</h1>
+        <h1 style={{ fontFamily: "Roboto" }}>Registration</h1>
 
         <form
           onSubmit={this.handleSubmit}
           style={styles.form}
           autoComplete="off"
         >
-          <label style={styles.label}>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
+          <TextField
+            label="Name:"
+            type="text"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
 
-          <label style={styles.label}>
-            E-mail:
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label style={styles.label}>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <button type="submit">SIGN UP 🟥🟩🟦🟪</button>
+          <TextField
+            label="E-mail:"
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+          <TextField
+            label="Password:"
+            type="password"
+            name="password"
+            value={password}
+            onChange={this.handleChange}
+          />
+          <br />
+          <Button
+            style={{ marginTop: 25 }}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            SIGN UP 🟦
+          </Button>
         </form>
       </div>
     );

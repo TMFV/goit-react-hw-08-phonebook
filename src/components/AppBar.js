@@ -2,7 +2,7 @@ import AuthNav from "./AuthNav";
 import UserMenu from "./UserMenu";
 import Navigation from "./Navigation";
 import { connect } from "react-redux";
-import authSelectors from "./redux/auth/auth-selectors";
+import authSelectors from "../redux/auth/auth-selectors";
 
 const styles = {
   header: {

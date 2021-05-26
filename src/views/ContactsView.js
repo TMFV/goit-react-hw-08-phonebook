@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ContactForm from "../ContactForm/ContactForm";
-import ContactList from "../ContactList/ContactList";
-import Filter from "../Filter/Filter";
+import ContactForm from "../components/ContactForm/ContactForm";
+import ContactList from "../components/ContactList/ContactList";
+import Filter from "../components/Filter/Filter";
 import appActions from "../redux/app/app-actions";
 import appOperations from "../redux/app/app-operations";
 import { connect } from "react-redux";
